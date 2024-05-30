@@ -6,10 +6,7 @@ import { ensureConfig } from '@edx/frontend-platform/config';
 import { AppContext } from '@edx/frontend-platform/react';
 
 import messages from './Footer.messages';
-import LanguageSelector from './LanguageSelector';
 
-import GymSettings from '../data/settings';
-const settings = await GymSettings();
 
 ensureConfig([
   'LMS_BASE_URL',
@@ -43,35 +40,56 @@ class SiteFooter extends React.Component {
       logo,
       intl,
     } = this.props;
-    const showLanguageSelector = supportedLanguages.length > 0 && onLanguageSelected;
     const { config } = this.context;
 
     return (
-      <footer
-        role="contentinfo"
-        className="site-footer gym-footer"
-      >
-        <div className="container">
-          <a
-            className="d-block"
-            href={config.LMS_BASE_URL}
-            aria-label={intl.formatMessage(messages['footer.logo.ariaLabel'])}
-          >
-            <img
-              style={{ maxHeight: 45 }}
-              src={logo || config.LOGO_TRADEMARK_URL}
-              alt={intl.formatMessage(messages['footer.logo.altText'])}
-            />
-          </a>
-          <div className="flex-grow-1" />
-          {showLanguageSelector && (
-            <LanguageSelector
-              options={supportedLanguages}
-              onSubmit={onLanguageSelected}
-            />
-          )}
-        </div>
-      </footer>
+      <footer role="contentinfo" class="site-footer">
+          <div class="container-fluid">
+            <div class="footer-content">
+              <div class="footer-upper">
+                <div class="footer-buttons">
+                  <a href={config.LMS_BASE_URL + "/about"}>What we do</a>
+                  <a href={config.LMS_BASE_URL + "/contact"}>Contact</a>
+                </div>
+                <div>
+                  <div class="footer-logos">
+                  <a href="https://twitter.com/BacHaSoftware" target="_blank" rel="noopener noreferrer">
+                    <FontAwesomeIcon icon={faTwitter} size="2x" color="black" />
+                  </a>
+                  <a href="https://www.linkedin.com/company/bac-ha-software/mycompany/" target="_blank" rel="noopener noreferrer">
+                    <FontAwesomeIcon icon={faLinkedin} size="2x" color="black" />
+                  </a>
+                  </div>
+                  <div class="footer-rights">
+                    © BacHaSoftware | All rights reserved | Privacy | Terms
+                  </div>
+                </div>
+              </div>
+              <div class="footer-divider"></div>
+              <div class="footer-lower">
+                <div>
+                <a
+                    className="d-block"
+                    href={config.LMS_BASE_URL}
+                    aria-label={intl.formatMessage(messages['footer.logo.ariaLabel'])}
+                  >
+                    <img
+                      className="footer-logo"
+                      src={logo || config.LOGO_TRADEMARK_URL}
+                      alt={intl.formatMessage(messages['footer.logo.altText'])}
+                    />
+                  </a>
+                  <div class="footer-license">
+                    Theme licensed under the AGPLv3 License. Copyright 2024 by BacHaSoftware
+                  </div>
+                </div>
+                <div class="footer-text">
+                  edX, Open edX and their respective logos are registered trademarks of edX Inc. Free online courses at edX.org
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
     );
   }
 }
