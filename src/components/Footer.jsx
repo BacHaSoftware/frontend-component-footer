@@ -4,9 +4,10 @@ import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { sendTrackEvent } from '@edx/frontend-platform/analytics';
 import { ensureConfig } from '@edx/frontend-platform/config';
 import { AppContext } from '@edx/frontend-platform/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter, faLinkedin, faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 import messages from './Footer.messages';
-
 
 ensureConfig([
   'LMS_BASE_URL',
@@ -43,53 +44,59 @@ class SiteFooter extends React.Component {
     const { config } = this.context;
 
     return (
-      <footer role="contentinfo" class="site-footer">
-          <div class="container-fluid">
-            <div class="footer-content">
-              <div class="footer-upper">
-                <div class="footer-buttons">
-                  <a href={config.LMS_BASE_URL + "/about"}>What we do</a>
-                  <a href={config.LMS_BASE_URL + "/contact"}>Contact</a>
-                </div>
-                <div>
-                  <div class="footer-logos">
+      <footer role="contentinfo" className="site-footer">
+        <div className="container-fluid">
+          <div className="footer-content">
+            <div className="footer-upper">
+              <div className="footer-buttons">
+                <a href={`${config.LMS_BASE_URL}/about`}>What we do</a>
+                <a href={`${config.LMS_BASE_URL}/contact`}>Contact</a>
+              </div>
+              <div>
+                <div className="footer-logos">
                   <a href="https://twitter.com/BacHaSoftware" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faTwitter} size="2x" color="black" />
                   </a>
                   <a href="https://www.linkedin.com/company/bac-ha-software/mycompany/" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faLinkedin} size="2x" color="black" />
                   </a>
-                  </div>
-                  <div class="footer-rights">
-                    © BacHaSoftware | All rights reserved | Privacy | Terms
-                  </div>
-                </div>
-              </div>
-              <div class="footer-divider"></div>
-              <div class="footer-lower">
-                <div>
-                <a
-                    className="d-block"
-                    href={config.LMS_BASE_URL}
-                    aria-label={intl.formatMessage(messages['footer.logo.ariaLabel'])}
-                  >
-                    <img
-                      className="footer-logo"
-                      src={logo || config.LOGO_TRADEMARK_URL}
-                      alt={intl.formatMessage(messages['footer.logo.altText'])}
-                    />
+                  <a href="https://www.facebook.com/bachasoftware/" target="_blank" rel="noopener noreferrer">
+                    <FontAwesomeIcon icon={faFacebook} size="2x" color="black" />
                   </a>
-                  <div class="footer-license">
-                    Theme licensed under the AGPLv3 License. Copyright 2024 by BacHaSoftware
-                  </div>
+                  <a href="https://www.youtube.com/@bhsoft" target="_blank" rel="noopener noreferrer">
+                    <FontAwesomeIcon icon={faYoutube} size="2x" color="black" />
+                  </a>
                 </div>
-                <div class="footer-text">
-                  edX, Open edX and their respective logos are registered trademarks of edX Inc. Free online courses at edX.org
+                <div className="footer-rights">
+                  © BacHaSoftware | All rights reserved | Privacy | Terms
                 </div>
               </div>
             </div>
+            <div className="footer-divider" />
+            <div className="footer-lower">
+              <div>
+                <a
+                  className="d-block"
+                  href={config.LMS_BASE_URL}
+                  aria-label={intl.formatMessage(messages['footer.logo.ariaLabel'])}
+                >
+                  <img
+                    className="footer-logo"
+                    src={logo || config.LOGO_TRADEMARK_URL}
+                    alt={intl.formatMessage(messages['footer.logo.altText'])}
+                  />
+                </a>
+                <div className="footer-license">
+                  Theme licensed under the AGPLv3 License. Copyright 2024 by BacHaSoftware
+                </div>
+              </div>
+              <div className="footer-text">
+                edX, Open edX and their respective logos are registered trademarks of edX Inc. Free online courses at edX.org
+              </div>
+            </div>
           </div>
-        </footer>
+        </div>
+      </footer>
     );
   }
 }
